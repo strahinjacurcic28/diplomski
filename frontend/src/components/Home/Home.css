@@ -1,0 +1,25 @@
+.home-container {
+  min-height: 100vh;
+  padding: 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+  color: #000000;
+  line-height: 1.6;
+}
+
+.home-container p{
+  color: #FF7F50;
+  font-size: 1.4rem;
+}
+
+.text-mask {
+  margin-top: 25px;
+  line-height: 0.9;
+  font-size: 6rem; /* adjust size */
+  font-weight: bold;
+  text-transform: uppercase;
+  background: url('../../assets/pushup.jpg') no-repeat center/cover;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}

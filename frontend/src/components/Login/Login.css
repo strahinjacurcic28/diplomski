@@ -1,0 +1,68 @@
+/* Make page scrollable & centered */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Login container */
+.login-container {
+  background: #ffffff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: center;
+}
+
+/* Title */
+.login-title {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Inputs */
+.login-form .login-input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+.login-form .login-input:focus {
+  border-color: #007bff;
+}
+
+/* Button */
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background: #FF7F50;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.login-button:hover {
+  background: #005fc5;
+}
+
+/* Message */
+.login-message {
+  margin-top: 15px;
+  color: #333;
+  font-size: 14px;
+}

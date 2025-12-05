@@ -1,0 +1,78 @@
+/* Page layout */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Register container */
+.register-container {
+  background: #ffffff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 380px;
+  text-align: center;
+}
+
+/* Title */
+.register-title {
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+/* Inputs and selects */
+.register-form .register-input,
+.register-form .register-select {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.2s ease;
+  background: #fff;
+}
+
+.register-form .register-input:focus,
+.register-form .register-select:focus {
+  border-color: #007bff;
+}
+
+/* Button */
+.register-button {
+  width: 100%;
+  padding: 12px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.register-button:hover {
+  background: #005fc5;
+}
+
+/* Messages */
+.register-message {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.register-message.success {
+  color: green;
+}
+
+.register-message.error {
+  color: red;
+}

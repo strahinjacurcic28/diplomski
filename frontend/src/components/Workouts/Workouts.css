@@ -1,0 +1,14 @@
+.workoutContainer{
+  height: 100%;
+}
+
+.workout-day {
+  background-color: #FF7F50 !important;
+  color: white;
+}
+
+.no-workout-day {
+  background-color: #f0f0f0 !important;
+  color: #333;
+}
+

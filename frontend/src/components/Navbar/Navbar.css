@@ -1,0 +1,34 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+
+  background: linear-gradient(to right, #00102b, #004080);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 8rem;
+  padding: 0 1rem;
+
+  z-index: 1000;
+}
+
+.nav-logo {
+  height: 60px;
+  width: auto;
+  filter: invert(66%) sepia(42%) saturate(2000%) hue-rotate(330deg) brightness(100%) contrast(101%);
+}
+
+.navbar a,
+.navbar button {
+  color: #FF7F50;
+  text-decoration: none;
+  font-size: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
