@@ -19,18 +19,22 @@ function App() {
   };
 
   return (
-      <div className="container">
-        <Navbar token={token} logout={logout} />
+    <div className="app-container">
+      <Navbar token={token} logout={logout} />
+
+      <div className="page-content">
         <Routes>
-          <Route path="/" element={<Home />}/>
+          <Route path="/" element={<Home />} />
+          <Route path="/workouts" element={<Workouts />} />
+          <Route path="/workout_builder" element={<WorkoutBuilder />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login setToken={setToken} />} />
           <Route path="/users/register" element={<Register />} />
-          <Route path="/workouts" element={<Workouts/>}/>
-          <Route path="/profile" element={<Profile/>}/>
-          <Route path="/workout_builder" element={<WorkoutBuilder/>}/>
         </Routes>
-        {/* <Footer></Footer> */}
       </div>
+
+      <Footer />
+    </div>
   );
 }
 

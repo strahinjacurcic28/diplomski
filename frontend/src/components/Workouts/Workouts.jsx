@@ -3,6 +3,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import "./Workouts.css";
 import Calendar from "react-calendar";
+import { formatDate } from "../../util/FormatDate";
 
 const Workouts = () => {
   const { token } = useContext(AuthContext);
@@ -37,72 +38,69 @@ const Workouts = () => {
   );
 
   return (
-    <div className="workoutContainer">
-      <div>
-        <Calendar
-          onChange={setDate}
-          value={date}
-          tileClassName={({ date: currentDate, view }) => {
-            if (view === "month") {
-              const isWorkoutDay = dates.some(
-                (d) => d.toDateString() === currentDate.toDateString()
-              );
-              return isWorkoutDay ? "workout-day" : "no-workout-day";
-            }
-          }}
-        />
+    <div className="workout-wrapper">
+      <div >
+        <div className="workout-calendar">
+          <Calendar
+            onChange={setDate}
+            value={date}
+            tileClassName={({ date: currentDate, view }) => {
+              if (view === "month") {
+                const isWorkoutDay = dates.some(
+                  (d) => d.toDateString() === currentDate.toDateString()
+                );
+                return isWorkoutDay ? "workout-day" : "no-workout-day";
+              }
+            }}
+          />
+        </div>
+
+        <div className="workout-container ">
+          {filteredWorkouts.length === 0 ? (
+            <p>No workout for this day.</p>
+          ) : (
+            filteredWorkouts.map((workout) => (
+              <div
+                key={workout.workout_id}
+              >
+                <h2>
+                  {formatDate(workout.workout_date)}
+                </h2>
+                <h2>{workout.workout_name}</h2>
+                <p>Notes: {workout.workout_notes}</p>
+
+                <h3>Exercises:</h3>
+                {workout.exercises.map((exercise) => (
+                  <div
+                    key={exercise.exercise_id}
+                  >
+                    <h4>{exercise.exercise_name}</h4>
+                    <p>Equipment: {exercise.exercise_equipment}</p>
+
+                    <h4>Sets:</h4>
+                    {exercise.sets && exercise.sets.length > 0 ? (
+                      <ol>
+                        {exercise.sets.map((set) => (
+                          <li key={set.set_id}>
+                            Reps: {set.reps}, Weight: {set.weight} kg, RIR:{" "}
+                            {set.rir}
+                          </li>
+                        ))}
+                      </ol>
+                    ) : (
+                      <p>No sets recorded</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ))
+          )}
+        </div>
+
+        <Link to="/workout_builder">
+          <button>Start New Workout</button>
+        </Link>
       </div>
-
-      <div>
-        {filteredWorkouts.length === 0 ? (
-          <p>No workout for this day.</p>
-        ) : (
-          filteredWorkouts.map((workout) => (
-            <div
-              key={workout.workout_id}
-              style={{
-                border: "1px solid #ccc",
-                margin: "10px",
-                padding: "10px",
-              }}
-            >
-              <h2>{workout.workout_name}</h2>
-              <p>Date: {new Date(workout.workout_date).toLocaleDateString()}</p>
-              <p>Duration: {workout.workout_duration} minutes</p>
-              <p>Notes: {workout.workout_notes}</p>
-
-              <h3>Exercises:</h3>
-              {workout.exercises.map((exercise) => (
-                <div
-                  key={exercise.exercise_id}
-                  style={{ marginLeft: "20px", marginBottom: "10px" }}
-                >
-                  <h4>{exercise.exercise_name}</h4>
-                  <p>Muscle group: {exercise.exercise_muscle_group}</p>
-                  <p>Equipment: {exercise.exercise_equipment}</p>
-
-                  <h5>Sets:</h5>
-                  {exercise.sets && exercise.sets.length > 0 ? (
-                    <ul>
-                      {exercise.sets.map((set) => (
-                        <li key={set.set_id}>
-                          Reps: {set.reps}, Weight: {set.weight} kg, RIR: {set.rir}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p>No sets recorded</p>
-                  )}
-                </div>
-              ))}
-            </div>
-          ))
-        )}
-      </div>
-
-      <Link to="/workout_builder">
-        <button>Start New Workout</button>
-      </Link>
     </div>
   );
 };

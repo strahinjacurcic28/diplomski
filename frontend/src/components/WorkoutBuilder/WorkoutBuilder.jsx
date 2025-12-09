@@ -1,10 +1,10 @@
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import "./WorkoutBuilder.css";
 
 export default function WorkoutBuilder() {
   const [workout, setWorkout] = useState({
     name: "",
-    date: new Date().toISOString().split("T")[0],
     duration: 0,
     notes: "",
     exercises: [],
@@ -12,7 +12,7 @@ export default function WorkoutBuilder() {
 
   const { token } = useContext(AuthContext);
   const [exercisesList, setExercisesList] = useState([]); // all exercises for select
-  const [selectedExerciseId, setSelectedExerciseId] = useState(""); 
+  const [selectedExerciseId, setSelectedExerciseId] = useState("");
   const [setInputs, setSetInputs] = useState({ weight: "", reps: "", rir: "" });
 
   // Fetch exercises from backend
@@ -32,7 +32,9 @@ export default function WorkoutBuilder() {
   }, [token]);
 
   const addExercise = () => {
-    const exercise = exercisesList.find((ex) => ex.id === Number(selectedExerciseId));
+    const exercise = exercisesList.find(
+      (ex) => ex.id === Number(selectedExerciseId)
+    );
     if (!exercise) return;
 
     setWorkout((prev) => ({
@@ -83,12 +85,13 @@ export default function WorkoutBuilder() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(workout),
       });
 
-      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      if (!response.ok)
+        throw new Error(`HTTP error! status: ${response.status}`);
       const data = await response.json();
       console.log(data);
       alert("Workout saved!");
@@ -99,29 +102,29 @@ export default function WorkoutBuilder() {
   };
 
   return (
-    <div>
-      <h1>Start Workout</h1>
+    <div className="workout-builder-wrapper">
+
+    <div className="workout-builder-container">
+      <h1 className="workout-builder-title">Start Workout</h1>
 
       <input
         type="text"
+        className="workout-builder-name"
         placeholder="Workout Name"
         value={workout.name}
         onChange={(e) => setWorkout({ ...workout, name: e.target.value })}
       />
-      <input
-        type="date"
-        value={workout.date}
-        onChange={(e) => setWorkout({ ...workout, date: e.target.value })}
-      />
+
       <textarea
+        className="workout-builder-notes"
         placeholder="Notes"
         value={workout.notes}
         onChange={(e) => setWorkout({ ...workout, notes: e.target.value })}
       />
 
-      {/* Exercise Selection */}
-      <div>
+      <div className="exercise-select-wrapper">
         <select
+          className="exercise-select"
           value={selectedExerciseId}
           onChange={(e) => setSelectedExerciseId(e.target.value)}
         >
@@ -132,46 +135,62 @@ export default function WorkoutBuilder() {
             </option>
           ))}
         </select>
-        <button onClick={addExercise}>+ Add Exercise</button>
+        <button className="add-exercise-btn" onClick={addExercise}>
+          + Add Exercise
+        </button>
       </div>
 
-      {/* Exercises + sets */}
-      {workout.exercises.map((ex, exIndex) => (
-        <div key={exIndex}>
-          <h2>{ex.name}</h2>
+      <div className="exercises-wrapper">
+        {workout.exercises.map((ex, exIndex) => (
+          <div className="exercise-card" key={exIndex}>
+            <h2 className="exercise-name">{ex.name}</h2>
 
-          {ex.sets.map((s, setIndex) => (
-            <div key={setIndex}>
-              <span>{s.set_number}</span>
-              <input
-                type="number"
-                value={s.weight}
-                onChange={(e) =>
-                  updateSet(exIndex, setIndex, "weight", Number(e.target.value))
-                }
-              />
-              <input
-                type="number"
-                value={s.reps}
-                onChange={(e) =>
-                  updateSet(exIndex, setIndex, "reps", Number(e.target.value))
-                }
-              />
-              <input
-                type="number"
-                value={s.rir}
-                onChange={(e) =>
-                  updateSet(exIndex, setIndex, "rir", Number(e.target.value))
-                }
-              />
-            </div>
-          ))}
+            {ex.sets.map((s, setIndex) => (
+              <div className="ex-set" key={setIndex}>
+                <span className="set-number">{s.set_number}</span>
+                <input
+                  type="number"
+                  className="set-input weight-input"
+                  value={s.weight}
+                  onChange={(e) =>
+                    updateSet(
+                      exIndex,
+                      setIndex,
+                      "weight",
+                      Number(e.target.value)
+                    )
+                  }
+                />
+                <input
+                  type="number"
+                  className="set-input reps-input"
+                  value={s.reps}
+                  onChange={(e) =>
+                    updateSet(exIndex, setIndex, "reps", Number(e.target.value))
+                  }
+                />
+                <input
+                  type="number"
+                  className="set-input rir-input"
+                  value={s.rir}
+                  onChange={(e) =>
+                    updateSet(exIndex, setIndex, "rir", Number(e.target.value))
+                  }
+                />
+              </div>
+            ))}
 
-          <button onClick={() => addSet(exIndex)}>+ Add Set</button>
-        </div>
-      ))}
+            <button className="add-set-btn" onClick={() => addSet(exIndex)}>
+              + Add Set
+            </button>
+          </div>
+        ))}
+      </div>
 
-      <button onClick={finishWorkout}>Finish Workout</button>
+      <button className="finish-workout-btn" onClick={finishWorkout}>
+        Finish Workout
+      </button>
+    </div>
     </div>
   );
 }

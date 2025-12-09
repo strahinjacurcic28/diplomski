@@ -1,0 +1,138 @@
+.workout-builder-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: calc(100vh - 60px);
+  width: 100%;
+
+  overflow-x: hidden;
+}
+
+/* Container */
+.workout-builder-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(to left, #00102b, #004080);
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Headings */
+.workout-builder-title {
+    color: #fff;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.exercise-name {
+  color: #fff;
+  font-size: 1.2rem;
+  margin: 1rem 0 0.5rem 0;
+}
+
+/* Inputs and textarea */
+.workout-builder-name,
+.workout-builder-notes,
+.exercise-select,
+.set-input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #555;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s, background-color 0.2s;
+}
+
+.workout-name:focus,
+.workout-notes:focus,
+.exercise-select:focus,
+.set-input:focus {
+  border-color: #ff7f50;
+  background-color: #e2e2e2;
+}
+
+.workout-notes {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Buttons */
+button {
+  padding: 0.6rem 1rem;
+  margin-top: 0.5rem;
+  background-color: #ff7f50;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #ff5722;
+}
+
+.add-exercise-btn,
+.add-set-btn {
+  margin-left: 10px;
+}
+
+.finish-workout-btn {
+  width: 100%;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+/* Exercises wrapper */
+.exercises-wrapper {
+  margin-top: 1.5rem;
+  border-top: 1px solid #d1d1d1;
+  padding-top: 1rem;
+}
+
+/* Individual exercise card */
+.exercise-card {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #333;
+  border-radius: 10px;
+  background: linear-gradient(to right, #00102b, #004080);
+}
+
+/* Sets inside exercises */
+.ex-set {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.set-input {
+  width: 80px;
+}
+
+.set-number {
+  width: 30px;
+  text-align: center;
+}
+
+/* Select + Add Exercise wrapper */
+.exercise-select-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.exercise-select {
+  flex: 1;
+}

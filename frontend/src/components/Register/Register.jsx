@@ -41,6 +41,8 @@ const Register = () => {
   };
 
   return (
+    <div className="register-wrapper">
+
     <div className="register-container">
       <h2 className="register-title">Register</h2>
 
@@ -100,6 +102,7 @@ const Register = () => {
 
         <button className="register-button" type="submit">Register</button>
       </form>
+    </div>
     </div>
 
   );

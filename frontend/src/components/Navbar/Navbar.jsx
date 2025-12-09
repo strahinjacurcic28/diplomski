@@ -15,10 +15,10 @@ const Navbar = () => {
 
       {token ? (
         <>
-          <Link to="/workouts">Workouts</Link>
-          <Link to="/profile">Profile</Link>
+          <Link to="/workouts" className="navigation">Workouts</Link>
+          <Link to="/profile" className="navigation">Profile</Link>
           <Link to="/">
-            <button onClick={logout}>Logout</button>
+            <button onClick={logout} className="navigation">Logout</button>
           </Link>
         </>
       ) : (

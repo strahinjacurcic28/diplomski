@@ -1,25 +1,13 @@
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  
   background: linear-gradient(to left, #000102, #004080);
-  color: #fff;
-
-  padding: 1.2rem 1.5rem 0.8rem;
-  z-index: 1000;
-
-  display: flex;
-  flex-direction: column;
+  color: white;
+  left: 0;
+  right: 0;  
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-footer {
-    clear: both;
-    position: relative;
-    height: 200px;
-    margin-top: -200px;
-}
 
 
 .footer-content {

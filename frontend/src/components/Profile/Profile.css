@@ -1,3 +1,26 @@
-.weight{
-    color: black;
+/* Full-page wrapper: centers content vertically & horizontally */
+.profile-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: calc(100vh - 60px);
+  width: 100%;
+
+  overflow-x: hidden;
+}
+
+/* Card styling */
+.profile-container {
+  background: linear-gradient(to left, #00102b, #004080);
+  color: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  width: 400px;  /* fixed width for the card */
+}
+
+/* Field styling */
+.profile-field {
+  margin-bottom: 20px;
 }

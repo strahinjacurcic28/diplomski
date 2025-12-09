@@ -29,6 +29,9 @@ export default function Login({ onLogin }) {
   };
 
   return (
+
+    <div className="login-wrapper">
+
     <div className="login-container">
       <h2 className="login-title">Login</h2>
 
@@ -52,6 +55,7 @@ export default function Login({ onLogin }) {
       </form>
 
       <p className="login-message">{message}</p>
+    </div>
     </div>
 
   );

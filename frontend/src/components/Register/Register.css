@@ -1,18 +1,20 @@
-/* Page layout */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
+.register-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  
+  min-height: 100vh;    /* full page height */
+  width: 100%;          /* full width */
+  
+  /* Fix for the previous footer 100vw issue */
+  overflow-x: hidden;   
+  
+  padding: 20px 0;       /* keeps it from touching top on very small screens */
 }
 
-/* Register container */
+
 .register-container {
-  background: #ffffff;
+  background: linear-gradient(to left, #00102b, #004080);
   padding: 30px 40px;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -20,14 +22,13 @@ body {
   text-align: center;
 }
 
-/* Title */
 .register-title {
+  color: #fff;
   margin-bottom: 20px;
   font-size: 26px;
   font-weight: bold;
 }
 
-/* Inputs and selects */
 .register-form .register-input,
 .register-form .register-select {
   width: 100%;
@@ -43,14 +44,13 @@ body {
 
 .register-form .register-input:focus,
 .register-form .register-select:focus {
-  border-color: #007bff;
+  border-color: #FF7F50;
 }
 
-/* Button */
 .register-button {
   width: 100%;
   padding: 12px;
-  background: #007bff;
+  background: #FF7F50;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -63,7 +63,6 @@ body {
   background: #005fc5;
 }
 
-/* Messages */
 .register-message {
   margin-bottom: 10px;
   font-size: 14px;

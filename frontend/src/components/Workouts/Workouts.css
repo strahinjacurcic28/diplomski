@@ -1,14 +1,117 @@
-.workoutContainer{
-  height: 100%;
+.workout-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: calc(100vh - 60px);
+  width: 100%;
+
+  padding: 40px 0 20px 0; /* space under navbar */
+  overflow-x: hidden;
+}
+
+.workout-calendar {
+  background: linear-gradient(to left, #00102b, #004080);
+  color: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: center;
+}
+
+.react-calendar__navigation button {
+  background-color: #FF7F50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  margin: 2px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none; 
+  color: #fff;
 }
 
 .workout-day {
   background-color: #FF7F50 !important;
-  color: white;
+  color: white !important;
 }
 
 .no-workout-day {
-  background-color: #f0f0f0 !important;
-  color: #333;
+  background-color: transparent !important;
 }
 
+.workout-container {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.workout-container > div {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px 20px;
+  background: linear-gradient(to left, #00102b, #004080);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Workout headings */
+.workout-container h2 {
+  color: #FF7F50;
+  margin-bottom: 10px;
+}
+
+.workout-container h3 {
+  color: #ddd;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.workout-container h4 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #ddd;
+}
+
+/* Exercises */
+.workout-container p {
+  color: #ddd;
+  margin: 2px 0;
+  font-size: 14px;
+}
+
+/* Sets list */
+.workout-container ol {
+  color: #ddd;
+  padding-left: 20px;
+  margin-top: 5px;
+}
+
+.workout-container li {
+  color: #ddd;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+button {
+  background-color: #FF7F50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 15px;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background-color: #e56f3e;
+}

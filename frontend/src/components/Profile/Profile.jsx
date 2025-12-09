@@ -1,6 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import BodyStats from "../BodyStats/BodyStats";
+import { formatDate } from "../../util/FormatDate";
+import './Profile.css'
 
 const Profile = () => {
   const { token } = useContext(AuthContext);
@@ -47,7 +49,7 @@ const Profile = () => {
   };
 
   const renderField = (label, field, type = "text") => (
-    <div>
+    <div className="profile-field">
       <strong>{label}: </strong>
       {editingField === field ? (
         <>
@@ -72,16 +74,19 @@ const Profile = () => {
   );
 
   return (
-    <div>
+  <div className="profile-wrapper">
+    <div className="profile-container">
       <h2>Profile</h2>
       {renderField("Username", "username")}
       {renderField("Email", "email", "email")}
       {renderField("Password", "password_hash", "password")}
-      <div>
-        <BodyStats></BodyStats>
-      </div>
+      <p><strong>Member since:</strong> {formatDate(user.created_at)}</p>
+      <BodyStats />
     </div>
-  );
+  </div>
+);
+
+
 };
 
 export default Profile;

@@ -89,15 +89,15 @@ router.post("/full", auth, async (req, res) => {
   const conn = await db.getConnection();
 
   try {
-    const { name, date, duration, notes, exercises } = req.body;
+    const { name, duration, notes, exercises } = req.body;
     const user_id = req.user.id;
 
     await conn.beginTransaction();
 
     const [workoutResult] = await conn.query(
       `INSERT INTO workouts (user_id, name, date, duration_minutes, notes)
-       VALUES (?, ?, ?, ?, ?)`,
-      [user_id, name, date, duration || 0, notes || ""]
+       VALUES (?, ?, NOW(), ?, ?)`,
+      [user_id, name, duration || 0, notes || ""]
     );
 
     const workoutId = workoutResult.insertId;

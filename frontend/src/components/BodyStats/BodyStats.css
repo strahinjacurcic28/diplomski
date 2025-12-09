@@ -1,0 +1,110 @@
+.body-stats-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+  width: 100%;
+}
+
+.body-stats-container {
+  width: 90%;
+  max-width: 700px;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.body-stats-container h2 {
+  color: #000000;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* TABLE WRAPPER TO ENABLE SCROLL */
+.body-stats-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  display: block;            /* needed for scroll */
+  max-height: 150px;         /* fixed height */
+  overflow-y: auto;          /* scrollable body */
+}
+
+/* Ensure header stays at top */
+.body-stats-container thead {
+  position: sticky;
+  top: 0;
+  background: #FF7F50;
+  color: white;
+  z-index: 10;
+}
+
+.body-stats-container th,
+.body-stats-container td {
+  color: #000000;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.body-stats-container tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.body-stats-container form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.body-stats-container input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.body-stats-container button {
+  background: #FF7F50;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.body-stats-container button:hover {
+  background: #e56f3e;
+}
+
+.stats-form {
+  display: flex;
+  flex-direction: column;   /* stack vertically */
+  gap: 12px;                /* space between inputs */
+  margin-bottom: 15px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.submit-btn {
+  width: 100%;              /* match input width */
+  padding: 10px;
+  border: none;
+  border-radius: 8px;       /* same radius as inputs */
+  background: #FF7F50;
+  color: white;
+  cursor: pointer;
+  margin-top: 5px;
+  font-size: 16px;
+  transition: 0.2s ease;
+}
+
+.submit-btn:hover {
+  background: #e56f3e;
+}

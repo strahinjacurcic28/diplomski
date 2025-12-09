@@ -1,102 +1,136 @@
 // BodyStats.jsx
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { formatDate } from "../../util/FormatDate";
+import "./BodyStats.css";
 
 const BodyStats = () => {
   const { token } = useContext(AuthContext);
   const [bodyStats, setBodyStats] = useState([]);
-  const [editingStatId, setEditingStatId] = useState(null);
-  const [editingField, setEditingField] = useState(null);
-  const [fieldValue, setFieldValue] = useState("");
+  const [newBodyStat, setNewBodyStat] = useState({
+    weight: 0,
+    body_fat: 0,
+  });
+  const [flag, setFlag] = useState(false);
 
   useEffect(() => {
+    fetchBodyStats();
+  }, [token]);
+
+  const fetchBodyStats = () => {
     fetch("http://localhost:5000/body_stats", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
       .then((data) => setBodyStats(data || []))
       .catch(console.error);
-  }, [token]);
-
-  const startEditingField = (statId, field, currentValue) => {
-    setEditingStatId(statId);
-    setEditingField(field);
-    setFieldValue(currentValue || "");
   };
 
-  const formatDate = (dateString) => {
-    const options = { day: "2-digit", month: "short", year: "numeric" };
-    return new Date(dateString).toLocaleDateString("en-GB", options);
-    };
+  const handleFlag = () => {
+    setFlag(!flag);
+  };
 
-  const saveField = async (statId, field) => {
+  const addWeighIn = async (e) => {
+    e.preventDefault();
+
     try {
-      const res = await fetch(`http://localhost:5000/body_stats/${statId}`, {
-        method: "PUT",
+      const response = await fetch("http://localhost:5000/body_stats", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ column: field, value: fieldValue }),
+        body: JSON.stringify(newBodyStat),
       });
 
-      const data = await res.json();
-      console.log(data);
+      if (!response.ok) throw new Error("Failed to add body stat");
 
-      setBodyStats((prev) =>
-        prev.map((stat) =>
-          stat.id === statId ? { ...stat, [field]: fieldValue } : stat
-        )
-      );
+      await response.json();
 
-      setEditingStatId(null);
-      setEditingField(null);
+      fetchBodyStats();
+
+      setNewBodyStat({ weight: 0, body_fat: 0 });
+      handleFlag();
     } catch (err) {
       console.error(err);
     }
   };
 
-  const renderField = (label, field, value, statId) => (
-    <div>
-      <strong>{label}: </strong>
-      {editingStatId === statId && editingField === field ? (
-        <>
-          <input
-            type={field === "date" ? "date" : "text"}
-            value={fieldValue}
-            onChange={(e) => setFieldValue(e.target.value)}
-          />
-          <button onClick={() => saveField(statId, field)}>Save</button>
-          <button
-            onClick={() => {
-              setEditingStatId(null);
-              setEditingField(null);
-            }}
-          >
+  return (
+    <div className="body-stats-wrapper">
+      <div className="body-stats-container">
+        <h2>Body Stats</h2>
+
+        {/* TABLE WRAPPER */}
+        <div className="table-wrapper">
+          <table className="stats-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Weight</th>
+                <th>Body Fat</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {bodyStats.map((e) => (
+                <tr key={e.id}>
+                  <td>{formatDate(e.date)}</td>
+                  <td>{e.weight} kg</td>
+                  <td>{e.body_fat}%</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* ADD FORM */}
+        {flag && (
+          <form className="stats-form" onSubmit={addWeighIn}>
+            <label htmlFor="">
+              Weight:
+              <input
+                type="number"
+                name="weight"
+                placeholder="Weight (kg)"
+                className="form-input"
+                value={newBodyStat.weight}
+                onChange={(e) =>
+                  setNewBodyStat({ ...newBodyStat, weight: e.target.value })
+                }
+              />
+            </label>
+
+            <label htmlFor="">
+              Body Fat:
+              <input
+                type="number"
+                name="body_fat"
+                placeholder="Body Fat (%)"
+                className="form-input"
+                value={newBodyStat.body_fat}
+                onChange={(e) =>
+                  setNewBodyStat({ ...newBodyStat, body_fat: e.target.value })
+                }
+              />
+            </label>
+
+            <button type="submit" className="submit-btn">
+              Submit
+            </button>
+          </form>
+        )}
+
+        {flag ? (
+          <button onClick={handleFlag} className="toggle-btn">
             Cancel
           </button>
-        </>
-      ) : (
-        <span
-          onClick={() => startEditingField(statId, field, value)}
-          style={{ cursor: "pointer" }}
-        >
-          {value || "-"}
-        </span>
-      )}
-    </div>
-  );
-
-  return (
-    <div>
-      <h2>Body Stats</h2>
-      {bodyStats.map((stat) => (
-        <div key={stat.id} style={{ marginBottom: "1rem" }}>
-          {renderField("Weight", "weight", stat.weight, stat.id)}
-          {renderField("Body Fat", "body_fat", stat.body_fat, stat.id)}
-          <strong>Last update:</strong> {formatDate(stat.date)}
-        </div>
-      ))}
+        ) : (
+          <button onClick={handleFlag} className="toggle-btn">
+            Add Weigh-in
+          </button>
+        )}
+      </div>
     </div>
   );
 };
