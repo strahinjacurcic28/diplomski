@@ -11,9 +11,9 @@ const workout_exercises = require('./routes/workout_exercises')
 const sets = require('./routes/sets')
 
 app.use(cors({
-  origin: "http://localhost:5173", // frontend URL
+  origin: "http://localhost:5173",
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true // if you ever use cookies
+  credentials: true
 }));
 app.use(express.json());
 

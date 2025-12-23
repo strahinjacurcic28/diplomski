@@ -10,7 +10,7 @@ router.use(cors());
 router.use(express.json());
 
 
-const SECRET = "mysecretkey"; // put in .env later
+const SECRET = "mysecretkey";
 
 const db = mysql.createPool({
   host: "localhost",

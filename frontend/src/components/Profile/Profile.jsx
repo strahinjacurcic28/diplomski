@@ -16,7 +16,7 @@ const Profile = () => {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
-      .then((data) => setUser(data[0] || {}))
+      .then((data) => setUser(data || {}))
       .catch(console.error);
   }, [token]);
 

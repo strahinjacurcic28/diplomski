@@ -71,7 +71,7 @@ const Workouts = () => {
                 <p>Notes: {workout.workout_notes}</p>
 
                 <h3>Exercises:</h3>
-                {workout.exercises.map((exercise) => (
+                {(workout.exercises || []).map((exercise) => (
                   <div
                     key={exercise.exercise_id}
                   >
