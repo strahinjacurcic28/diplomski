@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { formatDate } from "../../util/FormatDate";
 import "./BodyStats.css";
+import Button from "../Button/Button";
 
 const BodyStats = () => {
   const { token } = useContext(AuthContext);
@@ -61,7 +62,6 @@ const BodyStats = () => {
       <div className="body-stats-container">
         <h2>Body Stats</h2>
 
-        {/* TABLE WRAPPER */}
         <div className="table-wrapper">
           <table className="stats-table">
             <thead>
@@ -84,7 +84,6 @@ const BodyStats = () => {
           </table>
         </div>
 
-        {/* ADD FORM */}
         {flag && (
           <form className="stats-form" onSubmit={addWeighIn}>
             <label htmlFor="">
@@ -115,20 +114,14 @@ const BodyStats = () => {
               />
             </label>
 
-            <button type="submit" className="submit-btn">
-              Submit
-            </button>
+            <button type="submit" className="submit-btn">Submit</button>
           </form>
         )}
 
         {flag ? (
-          <button onClick={handleFlag} className="toggle-btn">
-            Cancel
-          </button>
+          <Button handleClick={handleFlag} variant="submit">Cancel</Button>
         ) : (
-          <button onClick={handleFlag} className="toggle-btn">
-            Add Weigh-in
-          </button>
+          <Button handleClick={handleFlag} variant="submit">Add Weigh-in</Button>
         )}
       </div>
     </div>

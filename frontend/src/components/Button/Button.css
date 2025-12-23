@@ -1,0 +1,24 @@
+.btn {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  &.logout {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #ff7f50;
+  }
+  &.submit {
+    background-color: #ff7f50;
+    color: #000000;
+  }
+  &.add-exercise {
+    width: auto;
+    align-self: center;
+    background-color: #ff7f50;
+    color: #000000;
+
+  }
+}

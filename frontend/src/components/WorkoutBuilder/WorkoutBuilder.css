@@ -65,33 +65,6 @@
   min-height: 80px;
 }
 
-/* Buttons */
-button {
-  padding: 0.6rem 1rem;
-  margin-top: 0.5rem;
-  background-color: #ff7f50;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.2s;
-}
-
-button:hover {
-  background-color: #ff5722;
-}
-
-.add-exercise-btn,
-.add-set-btn {
-  margin-left: 10px;
-}
-
-.finish-workout-btn {
-  width: 100%;
-  margin-top: 2rem;
-  font-size: 1.1rem;
-}
 
 /* Exercises wrapper */
 .exercises-wrapper {
@@ -135,4 +108,6 @@ button:hover {
 
 .exercise-select {
   flex: 1;
+  width: auto;
+  margin: 0;
 }

@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import "./WorkoutBuilder.css";
+import Button from "../Button/Button";
 
 export default function WorkoutBuilder() {
   const [workout, setWorkout] = useState({
@@ -135,9 +136,7 @@ export default function WorkoutBuilder() {
             </option>
           ))}
         </select>
-        <button className="add-exercise-btn" onClick={addExercise}>
-          + Add Exercise
-        </button>
+        <Button handleClick={addExercise} variant='add-exercise'>Add Exercise</Button>
       </div>
 
       <div className="exercises-wrapper">
@@ -180,16 +179,16 @@ export default function WorkoutBuilder() {
               </div>
             ))}
 
-            <button className="add-set-btn" onClick={() => addSet(exIndex)}>
+            <Button variant='submit' handleClick={() => addSet(exIndex)}>
               + Add Set
-            </button>
+            </Button>
           </div>
         ))}
       </div>
 
-      <button className="finish-workout-btn" onClick={finishWorkout}>
+      <Button variant='submit' handleClick={finishWorkout}>
         Finish Workout
-      </button>
+      </Button>
     </div>
     </div>
   );

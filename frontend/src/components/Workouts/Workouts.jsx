@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./Workouts.css";
 import Calendar from "react-calendar";
 import { formatDate } from "../../util/FormatDate";
+import Button from "../Button/Button";
 
 const Workouts = () => {
   const { token } = useContext(AuthContext);
@@ -98,7 +99,7 @@ const Workouts = () => {
         </div>
 
         <Link to="/workout_builder">
-          <button>Start New Workout</button>
+          <Button variant="submit">Start New Workout</Button>
         </Link>
       </div>
     </div>

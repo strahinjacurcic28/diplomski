@@ -20,7 +20,6 @@
   margin-bottom: 20px;
 }
 
-/* TABLE WRAPPER TO ENABLE SCROLL */
 .body-stats-container table {
   width: 100%;
   border-collapse: collapse;
@@ -30,7 +29,6 @@
   overflow-y: auto;          /* scrollable body */
 }
 
-/* Ensure header stays at top */
 .body-stats-container thead {
   position: sticky;
   top: 0;
@@ -63,7 +61,7 @@
   border-radius: 8px;
   border: 1px solid #ccc;
 }
-
+/* 
 .body-stats-container button {
   background: #FF7F50;
   color: white;
@@ -72,7 +70,7 @@
   border-radius: 8px;
   cursor: pointer;
   transition: 0.2s ease;
-}
+} */
 
 .body-stats-container button:hover {
   background: #e56f3e;
@@ -98,7 +96,7 @@
   border: none;
   border-radius: 8px;       /* same radius as inputs */
   background: #FF7F50;
-  color: white;
+  color: rgb(0, 0, 0);
   cursor: pointer;
   margin-top: 5px;
   font-size: 16px;
