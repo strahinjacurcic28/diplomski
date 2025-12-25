@@ -5,8 +5,10 @@ import "./Workouts.css";
 import Calendar from "react-calendar";
 import { formatDate } from "../../util/FormatDate";
 import Button from "../Button/Button";
+import { apiRequest } from "../../api/Api";
 
 const Workouts = () => {
+  const [loading, setLoading] = useState(true);
   const { token } = useContext(AuthContext);
   const [workouts, setWorkouts] = useState([]);
   const [dates, setDates] = useState([]);
@@ -14,24 +16,48 @@ const Workouts = () => {
   const [fullWorkouts, setFullWorkouts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/workouts", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setWorkouts(data);
-        const workoutDates = data.map((e) => new Date(e.date));
-        setDates(workoutDates);
-      })
-      .catch((err) => console.error(err));
+    const fetchWorkouts = async () => {
+      setLoading(true);
+      try {
+        const [workoutsData, fullWorkoutsData] = await Promise.all([
+          apiRequest("/workouts", "GET", null, token),
+          apiRequest("/workouts/full", "GET", null, token),
+        ]);
 
-    fetch("http://localhost:5000/workouts/full", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => setFullWorkouts(data))
-      .catch((err) => console.error(err));
+        setWorkouts(workoutsData);
+        setFullWorkouts(fullWorkoutsData);
+
+        const workoutDates = workoutsData.map((e) => new Date(e.date));
+        setDates(workoutDates);
+      } catch (err) {
+        console.error("Error fetching workouts:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchWorkouts();
   }, [token]);
+
+  const deleteWorkout = async (workoutId) => {
+    try {
+      await apiRequest(`/workouts/${workoutId}`, "DELETE", null, token);
+
+      setFullWorkouts((prev) => prev.filter((w) => w.workout_id !== workoutId));
+      setWorkouts((prev) => prev.filter((w) => w.workout_id !== workoutId));
+      setDates((prev) =>
+        prev.filter(
+          (d) =>
+            d.toDateString() !==
+            new Date(
+              fullWorkouts.find((w) => w.workout_id === workoutId)?.workout_date
+            ).toDateString()
+        )
+      );
+    } catch (err) {
+      console.error("Error deleting workout:", err);
+    }
+  };
 
   const selectedDateStr = date.toDateString();
   const filteredWorkouts = fullWorkouts.filter(
@@ -40,7 +66,7 @@ const Workouts = () => {
 
   return (
     <div className="workout-wrapper">
-      <div >
+      <div>
         <div className="workout-calendar">
           <Calendar
             onChange={setDate}
@@ -61,20 +87,14 @@ const Workouts = () => {
             <p>No workout for this day.</p>
           ) : (
             filteredWorkouts.map((workout) => (
-              <div
-                key={workout.workout_id}
-              >
-                <h2>
-                  {formatDate(workout.workout_date)}
-                </h2>
+              <div key={workout.workout_id}>
+                <h2>{formatDate(workout.workout_date)}</h2>
                 <h2>{workout.workout_name}</h2>
                 <p>Notes: {workout.workout_notes}</p>
 
                 <h3>Exercises:</h3>
                 {(workout.exercises || []).map((exercise) => (
-                  <div
-                    key={exercise.exercise_id}
-                  >
+                  <div key={exercise.exercise_id}>
                     <h4>{exercise.exercise_name}</h4>
                     <p>Equipment: {exercise.exercise_equipment}</p>
 
@@ -93,6 +113,18 @@ const Workouts = () => {
                     )}
                   </div>
                 ))}
+                <Button
+                  variant="delete-workout"
+                  handleClick={() => deleteWorkout(workout.workout_id)}
+                >
+                  Delete Workout
+                </Button>
+                <Button
+                  variant="edit-workout"
+                  handleClick={() => console.log("edit" + workout.workout_id)}
+                  >
+                  Edit Workout
+                  </Button>
               </div>
             ))
           )}

@@ -13,12 +13,20 @@
   &.submit {
     background-color: #ff7f50;
     color: #000000;
+    margin-top: 5px;
   }
   &.add-exercise {
     width: auto;
     align-self: center;
     background-color: #ff7f50;
     color: #000000;
-
+  }
+  &.delete-workout {
+    background-color: #ff7f50;
+    margin-right: 5px;
+  }
+  &.edit-workout {
+    background-color: #ff7f50;
+    margin-left: 5px;
   }
 }

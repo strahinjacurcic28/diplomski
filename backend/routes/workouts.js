@@ -9,6 +9,7 @@ router.use(express.json());
 
 router.post("/", auth, workoutsController.createWorkout);
 router.get("/", auth, workoutsController.getWorkouts);
+router.delete("/:id", auth, workoutsController.deleteWorkout);
 router.get("/full", auth, workoutsController.getFullWorkouts);
 router.post("/full", auth, workoutsController.createFullWorkout);
 

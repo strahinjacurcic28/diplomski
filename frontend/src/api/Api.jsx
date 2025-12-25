@@ -1,4 +1,3 @@
-// src/api/api.js
 const BASE_URL = "http://localhost:5000";
 
 export const apiRequest = async (path, method = "GET", body = null, token = null) => {

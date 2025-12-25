@@ -36,6 +36,21 @@ module.exports = {
     }
   },
 
+  deleteWorkout: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const result = await workoutsRepo.deleteWorkout(id);
+      if (result.affectedRows === 0)
+        return res.status(404).json({ message: "Workout not found" });
+
+      res.json({ message: "Workout deleted", deletedId: id });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Failed to delete workout" });
+    }
+  },
+
   createFullWorkout: async (req, res) => {
     try {
       const userId = req.user.id;

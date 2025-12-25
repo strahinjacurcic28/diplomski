@@ -53,6 +53,11 @@ module.exports = {
     return rows;
   },
 
+  deleteWorkout: async (id) => {
+    const [result] = await db.query("DELETE FROM workouts WHERE id=?", [id]);
+    return result;
+  },
+
   createFullWorkoutTransaction: async (
     userId,
     name,

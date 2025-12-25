@@ -3,6 +3,8 @@ import { AuthContext } from "../../context/AuthContext";
 import BodyStats from "../BodyStats/BodyStats";
 import { formatDate } from "../../util/FormatDate";
 import './Profile.css'
+import { apiRequest } from "../../api/Api";
+import Button from "../Button/Button";
 
 const Profile = () => {
   const { token } = useContext(AuthContext);
@@ -10,41 +12,51 @@ const Profile = () => {
   const [editingField, setEditingField] = useState(null);
   const [fieldValue, setFieldValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    fetch("http://localhost:5000/users", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => setUser(data || {}))
-      .catch(console.error);
+  useEffect(() => { 
+    fetchUser();
   }, [token]);
+  
+  const fetchUser = async () => {
+    setLoading(true);
+    try {
+      const userData = await apiRequest("/users", "GET", null, token);
+      setUser(userData);
+
+    } catch (err) {
+      console.error("Error fetching user:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const startEditing = (field) => {
     setEditingField(field);
-    setFieldValue(user[field] || "");
+    if (field === "password_hash") {
+      setPasswordValue("");
+    } else {
+      setFieldValue(user[field] || "");
+    }
   };
 
   const saveField = async (field) => {
-    let value = field === "password" ? passwordValue : fieldValue;
+    let value = field === "password_hash" ? passwordValue : fieldValue;
 
     try {
-      const res = await fetch("http://localhost:5000/users", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ column: field, value }),
-      });
-
-      const data = await res.json();
-      if (data.user) setUser(data.user);
+      const data = await apiRequest("/users", "PUT", { column: field, value }, token);
+      if (data.user) {
+        fetchUser();
+      } else if (data[field] !== undefined) {
+        setUser(prev => ({ ...prev, [field]: data[field] }));
+      } 
+      
       setEditingField(null);
       setFieldValue("");
       setPasswordValue("");
+      console.log(user)
     } catch (err) {
-      console.error(err);
+      console.error("Error updating profile:", err);
     }
   };
 
@@ -55,39 +67,43 @@ const Profile = () => {
         <>
           <input
             type={type}
-            value={field === "password" ? passwordValue : fieldValue}
+            value={field === "password_hash" ? passwordValue : fieldValue}
             onChange={(e) =>
-              field === "password"
+              field === "password_hash"
                 ? setPasswordValue(e.target.value)
                 : setFieldValue(e.target.value)
             }
           />
-          <button onClick={() => saveField(field)}>Save</button>
-          <button onClick={() => setEditingField(null)}>Cancel</button>
+          <Button handleClick={() => saveField(field)} variant="submit">Save</Button>
+          <Button handleClick={() => setEditingField(null)} variant="submit">Cancel</Button>
         </>
       ) : (
         <span onClick={() => startEditing(field)} style={{ cursor: "pointer" }}>
-          {field === "password_hash" ? "••••••••" : user[field] || "-"}
+          {field === "password_hash" ? "••••••••" : (user[field] || "-")}
         </span>
       )}
     </div>
   );
 
   return (
-  <div className="profile-wrapper">
-    <div className="profile-container">
-      <h2>Profile</h2>
-      {renderField("Username", "username")}
-      {renderField("Email", "email", "email")}
-      {renderField("Password", "password_hash", "password")}
-      <p><strong>Member since:</strong> {formatDate(user.created_at)}</p>
-      <BodyStats />
+    <div className="profile-wrapper">
+      <div className="profile-container">
+        <h2>Profile</h2>
+        {loading ? (
+          <p>Loading profile...</p>
+        ) : (
+          <>
+            {renderField("Username", "username")}
+            {renderField("Email", "email", "email")}
+            {renderField("Password", "password_hash", "password")}
+            <p><strong>Sex: </strong>{user.gender ? user.gender : "-"} </p>
+            <p><strong>Member since:</strong> {formatDate(user.created_at)}</p>
+            <BodyStats />
+          </>
+        )}
+      </div>
     </div>
-  </div>
-);
-
-
+  );
 };
 
 export default Profile;
-
