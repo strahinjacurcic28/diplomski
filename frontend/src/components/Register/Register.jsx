@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { apiRequest } from "../../api/Api";
 import './Register.css'
+import Button from "../Button/Button";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -100,7 +101,7 @@ const Register = () => {
           onChange={handleChange}
         />
 
-        <button className="register-button" type="submit">Register</button>
+        <Button variant="register-button" type="submit">Register</Button>
       </form>
     </div>
     </div>

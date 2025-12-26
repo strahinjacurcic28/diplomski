@@ -86,7 +86,7 @@ const BodyStats = () => {
 
         {flag && (
           <form className="stats-form" onSubmit={addWeighIn}>
-            <label htmlFor="">
+            <label className="label">
               Weight:
               <input
                 type="number"
@@ -100,7 +100,7 @@ const BodyStats = () => {
               />
             </label>
 
-            <label htmlFor="">
+            <label className="label">
               Body Fat:
               <input
                 type="number"
@@ -114,14 +114,14 @@ const BodyStats = () => {
               />
             </label>
 
-            <button type="submit" className="submit-btn">Submit</button>
+            <Button type="submit" variant="submit">Submit</Button>
           </form>
         )}
 
         {flag ? (
-          <Button handleClick={handleFlag} variant="submit">Cancel</Button>
+          <Button handleClick={handleFlag} variant="cancel">Cancel</Button>
         ) : (
-          <Button handleClick={handleFlag} variant="submit">Add Weigh-in</Button>
+          <Button handleClick={handleFlag} variant="cancel">Add Weigh-in</Button>
         )}
       </div>
     </div>

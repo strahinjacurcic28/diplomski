@@ -74,8 +74,8 @@ const Profile = () => {
                 : setFieldValue(e.target.value)
             }
           />
-          <Button handleClick={() => saveField(field)} variant="submit">Save</Button>
-          <Button handleClick={() => setEditingField(null)} variant="submit">Cancel</Button>
+          <Button handleClick={() => saveField(field)} variant="update-profile">Save</Button>
+          <Button handleClick={() => setEditingField(null)} variant="update-profile">Cancel</Button>
         </>
       ) : (
         <span onClick={() => startEditing(field)} style={{ cursor: "pointer" }}>
@@ -96,7 +96,7 @@ const Profile = () => {
             {renderField("Username", "username")}
             {renderField("Email", "email", "email")}
             {renderField("Password", "password_hash", "password")}
-            <p><strong>Sex: </strong>{user.gender ? user.gender : "-"} </p>
+            <p><strong>Gender: </strong>{user.gender ? user.gender : "-"} </p>
             <p><strong>Member since:</strong> {formatDate(user.created_at)}</p>
             <BodyStats />
           </>

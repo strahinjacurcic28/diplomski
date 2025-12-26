@@ -2,12 +2,12 @@
   color: #ffffff;
   text-decoration: none;
   font-size: 1rem;
-  background: none;
   border: none;
   cursor: pointer;
   margin: 0;
   &.logout {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: none;
     color: #ff7f50;
   }
   &.submit {
@@ -22,11 +22,56 @@
     color: #000000;
   }
   &.delete-workout {
+    color: #000000;
     background-color: #ff7f50;
     margin-right: 5px;
   }
   &.edit-workout {
+    color: #000000;
     background-color: #ff7f50;
     margin-left: 5px;
+  }
+  &.login-button {
+    color: #000000;
+    background-color: #ff7f50;
+  }
+  &.register-button {
+    width: 100%;
+    background: #FF7F50;
+    color: #000000;
+    transition: background 0.2s ease;
+  }
+  &.cancel{
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #FF7F50;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-size: 16px;
+  }
+  &.update-profile{
+    padding: 12px;
+    margin-left: 2px;
+    margin-right: 2px;
+    border: none;
+    border-radius: 8px;
+    background: #FF7F50;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-size: 12px;
+  }
+  &.delete-set{
+    width: 100%;
+    padding: 8px;
+    background: #FF7F50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.2s ease;
+    text-align: center;
   }
 }

@@ -29,9 +29,20 @@
   font-weight: bold;
 }
 
-.register-form .register-input,
+.register-form .register-input {
+  width: 90%;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.2s ease;
+  background: #fff;
+}
+
 .register-form .register-select {
-  width: 100%;
+  width: 98%;
   padding: 12px 14px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
@@ -45,22 +56,6 @@
 .register-form .register-input:focus,
 .register-form .register-select:focus {
   border-color: #FF7F50;
-}
-
-.register-button {
-  width: 100%;
-  padding: 12px;
-  background: #FF7F50;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.register-button:hover {
-  background: #005fc5;
 }
 
 .register-message {

@@ -4,6 +4,7 @@ import { apiRequest } from "../../api/Api"; // 2 levels up from components/Regis
 import './Login.css'
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Button from "../Button/Button";
 
 export default function Login({ onLogin }) {
   const { login } = useContext(AuthContext);
@@ -51,7 +52,7 @@ export default function Login({ onLogin }) {
           onChange={handleChange}
           required
         />
-        <button className="login-button" type="submit">Login</button>
+        <Button variant="login-button" type="submit">Login</Button>
       </form>
 
       <p className="login-message">{message}</p>

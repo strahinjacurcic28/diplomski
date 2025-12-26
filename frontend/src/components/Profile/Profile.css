@@ -1,4 +1,3 @@
-/* Full-page wrapper: centers content vertically & horizontally */
 .profile-wrapper {
   display: flex;
   justify-content: center;
@@ -6,11 +5,10 @@
 
   min-height: calc(100vh - 60px);
   width: 100%;
-
+  padding: 60px 0 20px 0;
   overflow-x: hidden;
 }
 
-/* Card styling */
 .profile-container {
   background: linear-gradient(to left, #00102b, #004080);
   color: #fff;
@@ -20,7 +18,6 @@
   width: 400px;  /* fixed width for the card */
 }
 
-/* Field styling */
 .profile-field {
   margin-bottom: 20px;
 }

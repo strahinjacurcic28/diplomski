@@ -84,7 +84,10 @@ const Workouts = () => {
 
         <div className="workout-container ">
           {filteredWorkouts.length === 0 ? (
-            <p>No workout for this day.</p>
+            <>
+              <h5 className="no-workout">Selected date: {formatDate(date)}</h5>
+              <h5 className="no-workout">No workout has been done on this day.</h5>
+            </>
           ) : (
             filteredWorkouts.map((workout) => (
               <div key={workout.workout_id}>

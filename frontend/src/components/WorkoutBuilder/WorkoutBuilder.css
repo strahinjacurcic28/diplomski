@@ -5,11 +5,10 @@
 
   min-height: calc(100vh - 60px);
   width: 100%;
-
+  padding: 60px 0 20px 0;
   overflow-x: hidden;
 }
 
-/* Container */
 .workout-builder-container {
   max-width: 700px;
   margin: 2rem auto;
@@ -21,7 +20,6 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Headings */
 .workout-builder-title {
     color: #fff;
   text-align: center;
@@ -35,12 +33,11 @@
   margin: 1rem 0 0.5rem 0;
 }
 
-/* Inputs and textarea */
 .workout-builder-name,
 .workout-builder-notes,
 .exercise-select,
 .set-input {
-  width: 100%;
+  width: 94%;
   padding: 0.6rem 0.8rem;
   margin-bottom: 1rem;
   border: 1px solid #555;
@@ -66,14 +63,12 @@
 }
 
 
-/* Exercises wrapper */
 .exercises-wrapper {
   margin-top: 1.5rem;
   border-top: 1px solid #d1d1d1;
   padding-top: 1rem;
 }
 
-/* Individual exercise card */
 .exercise-card {
   margin-bottom: 1.5rem;
   padding: 1rem;
@@ -82,24 +77,54 @@
   background: linear-gradient(to right, #00102b, #004080);
 }
 
-/* Sets inside exercises */
+.sets-header {
+  display: grid;
+  grid-template-columns: 50px 1fr 1fr 1fr 90px;
+  gap: 12px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+
 .ex-set {
-  display: flex;
-  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: 50px 1fr 1fr 1fr 90px;
+  gap: 9px;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 10px;
+}
+
+.sets-header,
+.ex-set {
+  display: grid;
+  grid-template-columns: 
+    20px 
+    90px     
+    70px     
+    70px      
+    90px;    
+  align-items: center;
 }
 
 .set-input {
-  width: 80px;
+  width: 100%;
+  height: 34px;
+  padding: 4px 8px;
+  font-size: 14px;
+
+  border-radius: 6px;
+  border: none;
+
+  margin: 0 4px;
+  box-sizing: border-box;
 }
 
 .set-number {
-  width: 30px;
   text-align: center;
+  font-weight: 600;
 }
 
-/* Select + Add Exercise wrapper */
 .exercise-select-wrapper {
   display: flex;
   align-items: center;

@@ -23,7 +23,7 @@
   filter: invert(66%) sepia(42%) saturate(2000%) hue-rotate(330deg) brightness(100%) contrast(101%);
 }
 
-.navbar a{
+.navigation{
   color: #FF7F50;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   text-decoration: none;

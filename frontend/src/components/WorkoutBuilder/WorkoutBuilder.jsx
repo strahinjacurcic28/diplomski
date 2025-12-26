@@ -132,21 +132,30 @@ export default function WorkoutBuilder() {
   };
 
   const handleDeleteSet = (exIndex, setIndex) => {
-    setWorkout((prev) => {
-      const updated = { ...prev };
-      updated.exercises[exIndex].sets = updated.exercises[exIndex].sets.filter(
-        (_, index) => index !== setIndex
-      );
-      // Renumber sets
-      updated.exercises[exIndex].sets = updated.exercises[exIndex].sets.map(
-        (set, index) => ({
-          ...set,
-          set_number: index + 1,
-        })
-      );
-      return updated;
-    });
-  };
+  setWorkout((prev) => {
+    const updated = { ...prev };
+    
+    const updatedExercises = [...updated.exercises];
+    const exerciseToUpdate = { ...updatedExercises[exIndex] };
+    
+    const updatedSets = exerciseToUpdate.sets.filter(
+      (_, index) => index !== setIndex
+    );
+    
+    const renumberedSets = updatedSets.map((set, index) => ({
+      ...set,
+      set_number: index + 1,
+    }));
+    
+    exerciseToUpdate.sets = renumberedSets;
+    updatedExercises[exIndex] = exerciseToUpdate;
+    
+    return {
+      ...updated,
+      exercises: updatedExercises
+    };
+  });
+};
 
   return (
     <div className="workout-builder-wrapper">
@@ -204,7 +213,7 @@ export default function WorkoutBuilder() {
                 <div className="exercise-header">
                   <h2 className="exercise-name">{ex.name}</h2>
                   <Button
-                    variant="danger"
+                    variant="submit"
                     handleClick={() => handleDeleteExercise(exIndex)}
                   >
                     Remove
@@ -223,14 +232,14 @@ export default function WorkoutBuilder() {
                       <span>Weight (kg)</span>
                       <span>Reps</span>
                       <span>RIR</span>
-                      <span>Actions</span>
+                      <span></span>
                     </div>
                     {ex.sets.map((s, setIndex) => (
                       <div className="ex-set" key={setIndex}>
                         <span className="set-number">{s.set_number}</span>
                         <input
                           type="number"
-                          className="set-input weight-input"
+                          className="set-input"
                           value={s.weight}
                           onChange={(e) =>
                             updateSet(
@@ -243,7 +252,7 @@ export default function WorkoutBuilder() {
                         />
                         <input
                           type="number"
-                          className="set-input reps-input"
+                          className="set-input"
                           value={s.reps}
                           onChange={(e) =>
                             updateSet(
@@ -256,7 +265,7 @@ export default function WorkoutBuilder() {
                         />
                         <input
                           type="number"
-                          className="set-input rir-input"
+                          className="set-input"
                           value={s.rir}
                           onChange={(e) =>
                             updateSet(
@@ -268,8 +277,7 @@ export default function WorkoutBuilder() {
                           }
                         />
                         <Button
-                          variant="danger"
-                          size="small"
+                          variant="delete-set"
                           handleClick={() => handleDeleteSet(exIndex, setIndex)}
                         >
                           Delete
