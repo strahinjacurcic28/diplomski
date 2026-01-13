@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const usersRepo = require("../db/users.sql");
+const usersRepo = require("../repositories/users.sql");
 
 module.exports = {
   getUser: async (req, res) => {

@@ -1,4 +1,4 @@
-const bodyStatsRepo = require("../db/bodyStats.sql");
+const bodyStatsRepo = require("../repositories/bodyStats.sql");
 
 module.exports = {
   getBodyStats: async (req, res) => {

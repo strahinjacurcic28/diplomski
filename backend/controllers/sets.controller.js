@@ -1,4 +1,4 @@
-const setsRepo = require("../db/sets.sql");
+const setsRepo = require("../repositories/sets.sql");
 
 module.exports = {
   getSets: async (req, res) => {

@@ -27,6 +27,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/workouts" element={<Workouts />} />
           <Route path="/workout_builder" element={<WorkoutBuilder />} />
+          <Route path="/workout_builder/:id" element={<WorkoutBuilder />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login setToken={setToken} />} />
           <Route path="/users/register" element={<Register />} />

@@ -1,4 +1,4 @@
-const workoutsRepo = require("../db/workouts.sql");
+const workoutsRepo = require("../repositories/workouts.sql");
 
 module.exports = {
   createWorkout: async (req, res) => {
@@ -6,7 +6,13 @@ module.exports = {
       const userId = req.user.id;
       const { name, date, duration, notes } = req.body;
 
-      const workoutId = await workoutsRepo.createWorkout(userId, name, date, duration, notes);
+      const workoutId = await workoutsRepo.createWorkout(
+        userId,
+        name,
+        date,
+        duration,
+        notes
+      );
       res.status(201).json({ message: "Workout created", id: workoutId });
     } catch (err) {
       console.error(err);
@@ -18,7 +24,7 @@ module.exports = {
     try {
       const userId = req.user.id;
       const workouts = await workoutsRepo.getWorkoutsByUser(userId);
-      res.json(workouts); // must be iterable
+      res.json(workouts);
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: "DB error" });
@@ -29,7 +35,18 @@ module.exports = {
     try {
       const userId = req.user.id;
       const workouts = await workoutsRepo.getFullWorkoutsByUser(userId);
-      res.json(workouts); // must be iterable
+      res.json(workouts);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "DB error" });
+    }
+  },
+
+  getFullWorkoutById: async (req, res) => {
+    try {
+      const workoutId = req.params.id;
+      const workouts = await workoutsRepo.getFullWorkoutById(workoutId);
+      res.json(workouts);
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: "DB error" });
@@ -68,6 +85,34 @@ module.exports = {
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: "Failed to save workout" });
+    }
+  },
+
+  updateFullWorkout: async (req, res) => {
+    try {
+      const workoutId = req.params.id;
+      const userId = req.user.id; // dolazi iz auth middleware-a
+
+      const { name, duration, notes, exercises } = req.body;
+
+      await workoutsRepo.updateFullWorkoutTransaction(
+        workoutId,
+        userId,
+        name,
+        duration,
+        notes,
+        exercises
+      );
+
+      res.json({ message: "Workout updated successfully" });
+    } catch (err) {
+      console.error(err);
+
+      if (err.message.includes("not found")) {
+        return res.status(404).json({ error: err.message });
+      }
+
+      res.status(500).json({ error: "DB error" });
     }
   },
 };

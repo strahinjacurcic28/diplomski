@@ -1,4 +1,4 @@
-const workoutExercisesRepo = require("../db/workoutExercises.sql");
+const workoutExercisesRepo = require("../repositories/workoutExercises.sql");
 
 module.exports = {
   addExercise: async (req, res) => {

@@ -122,12 +122,11 @@ const Workouts = () => {
                 >
                   Delete Workout
                 </Button>
-                <Button
-                  variant="edit-workout"
-                  handleClick={() => console.log("edit" + workout.workout_id)}
-                  >
-                  Edit Workout
+                <Link to={`/workout_builder/${workout.workout_id}`}>
+                  <Button variant="edit-workout">
+                    Edit Workout
                   </Button>
+                </Link>
               </div>
             ))
           )}
